@@ -1,0 +1,62 @@
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
+using Serilog;
+using System;
+using System.IO;
+
+namespace FoxHound.Web
+{
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            IConfigurationRoot currentConfiguration = GetCurrentConfiguration().Build();
+            Log.Logger = CreateLogger(currentConfiguration);
+
+            try
+            {
+                Log.Information("Starting FoxHound");
+                CreateHostBuilder(args).Build().Run();
+                Log.Information("FoxHound has stopped");
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Failed to start FoxHound");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                })
+                .UseSerilog();
+
+        private static ILogger CreateLogger(IConfigurationRoot currentConfiguration)
+        {
+            var logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(currentConfiguration)
+                .CreateLogger();
+
+            return logger;
+        }
+
+        private static IConfigurationBuilder GetCurrentConfiguration()
+        {
+            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{environment}.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables();
+
+            return configuration;
+        }
+    }
+}
