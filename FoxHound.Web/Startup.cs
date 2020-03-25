@@ -1,3 +1,5 @@
+using System;
+using System.IO;
 using FoxHound.App.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,9 +12,9 @@ namespace FoxHound.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup()
         {
-            Configuration = configuration;
+            Configuration = Program.GetCurrentConfiguration().Build();
         }
 
         public IConfiguration Configuration { get; }
