@@ -1,5 +1,3 @@
-using System;
-using System.IO;
 using FoxHound.App.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
