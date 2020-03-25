@@ -38,6 +38,19 @@ namespace FoxHound.Web
                 })
                 .UseSerilog();
 
+        public static IConfigurationBuilder GetCurrentConfiguration()
+        {
+            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{environment}.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
+
+            return configuration;
+        }
+
         private static ILogger CreateLogger(IConfigurationRoot currentConfiguration)
         {
             var logger = new LoggerConfiguration()
@@ -45,18 +58,6 @@ namespace FoxHound.Web
                 .CreateLogger();
 
             return logger;
-        }
-
-        private static IConfigurationBuilder GetCurrentConfiguration()
-        {
-            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{environment}.json", optional: false, reloadOnChange: true)
-                .AddEnvironmentVariables();
-
-            return configuration;
         }
     }
 }
