@@ -25,6 +25,8 @@ namespace FoxHound.Web.Controllers
         [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> Get()
         {
+            _logger.LogInformation("Calling get weather forecasts");
+
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
