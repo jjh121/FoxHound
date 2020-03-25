@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FoxHound.App.Data;
+using FoxHound.App.Domain;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FoxHound.Web.Controllers
 {
@@ -15,10 +19,12 @@ namespace FoxHound.Web.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
+        private readonly IFoxHoundData _foxHoundData;
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(IFoxHoundData foxHoundData, ILogger<WeatherForecastController> logger)
         {
+            _foxHoundData = foxHoundData;
             _logger = logger;
         }
 
@@ -35,6 +41,13 @@ namespace FoxHound.Web.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+        }
+
+        [HttpGet("blogs")]
+        public async Task<IEnumerable<Blog>> GetBlogs()
+        {
+            List<Blog> blogs = await _foxHoundData.Blogs.ToListAsync();
+            return blogs;
         }
     }
 }
