@@ -7,7 +7,7 @@ using System.IO;
 
 namespace FoxHound.Web
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {
@@ -34,18 +34,10 @@ namespace FoxHound.Web
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.ConfigureAppConfiguration(config => config.AddLocalAppSettings());
                     webBuilder.UseStartup<Startup>();
                 })
                 .UseSerilog();
-
-        private static ILogger CreateLogger(IConfigurationRoot currentConfiguration)
-        {
-            var logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(currentConfiguration)
-                .CreateLogger();
-
-            return logger;
-        }
 
         private static IConfigurationBuilder GetCurrentConfiguration()
         {
@@ -54,9 +46,24 @@ namespace FoxHound.Web
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{environment}.json", optional: false, reloadOnChange: true)
+                .AddLocalAppSettings()
                 .AddEnvironmentVariables();
 
             return configuration;
+        }
+
+        private static IConfigurationBuilder AddLocalAppSettings(this IConfigurationBuilder builder)
+        {
+            return builder.AddJsonFile("appsettings.Local.json", optional: true, reloadOnChange: true);
+        }
+
+        private static ILogger CreateLogger(IConfigurationRoot currentConfiguration)
+        {
+            var logger = new LoggerConfiguration()
+                .ReadFrom.Configuration(currentConfiguration)
+                .CreateLogger();
+
+            return logger;
         }
     }
 }
