@@ -1,10 +1,13 @@
 using FoxHound.App.Data;
+using FoxHound.App.Utility;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Reflection;
 
 namespace FoxHound.Web
 {
@@ -25,6 +28,9 @@ namespace FoxHound.Web
             string connectionString = Configuration.GetConnectionString("FoxHoundConnection");
             services.AddDbContext<FoxHoundData>(options => options.UseSqlServer(connectionString));
             services.AddScoped<IFoxHoundData, FoxHoundData>();
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingPipelineBehavior<,>));
+            services.AddMediatR(Assembly.Load("FoxHound.App"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
