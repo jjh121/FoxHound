@@ -4,6 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace FoxHound.Web
 {
@@ -34,11 +35,14 @@ namespace FoxHound.Web
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    // Ensure startup receives all configuration, including all appsettings.x.json files
+                    var configurationRoot = new ConfigurationRoot(GetCurrentConfiguration().Build().Providers.ToList());
+                    webBuilder.ConfigureAppConfiguration(x => x.AddConfiguration(configurationRoot));
                     webBuilder.UseStartup<Startup>();
                 })
                 .UseSerilog();
 
-        public static IConfigurationBuilder GetCurrentConfiguration()
+        private static IConfigurationBuilder GetCurrentConfiguration()
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production";
             var configuration = new ConfigurationBuilder()
