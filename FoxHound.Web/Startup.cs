@@ -10,9 +10,9 @@ namespace FoxHound.Web
 {
     public class Startup
     {
-        public Startup()
+        public Startup(IConfiguration configuration)
         {
-            Configuration = Program.GetCurrentConfiguration().Build();
+            Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
