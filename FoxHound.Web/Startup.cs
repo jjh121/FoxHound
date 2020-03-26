@@ -1,10 +1,14 @@
 using FoxHound.App.Data;
+using FoxHound.App.Utility;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 namespace FoxHound.Web
 {
@@ -25,6 +29,14 @@ namespace FoxHound.Web
             string connectionString = Configuration.GetConnectionString("FoxHoundConnection");
             services.AddDbContext<FoxHoundData>(options => options.UseSqlServer(connectionString));
             services.AddScoped<IFoxHoundData, FoxHoundData>();
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingPipelineBehavior<,>));
+            services.AddMediatR(Assembly.Load("FoxHound.App"));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "FoxHound API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,10 +47,15 @@ namespace FoxHound.Web
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwagger();
             app.UseHttpsRedirection();
 
-            app.UseRouting();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
+            app.UseRouting();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

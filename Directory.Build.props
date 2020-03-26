@@ -1,0 +1,12 @@
+<Project>
+  <PropertyGroup>
+    <CodeAnalysisRuleSet>../Nnpp.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118" PrivateAssets="all" />
+	  <AdditionalFiles Include="../stylecop.json" Link="stylecop.json" />
+	  <AdditionalFiles Include="../Nnpp.ruleset" Link="Nnpp.ruleset" />
+  </ItemGroup>
+</Project>
