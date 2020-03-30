@@ -31,6 +31,7 @@ namespace FoxHound.Web
             services.AddScoped<IFoxHoundData, FoxHoundData>();
 
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingPipelineBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
             services.AddMediatR(Assembly.Load("FoxHound.App"));
 
             services.AddSwaggerGen(c =>
