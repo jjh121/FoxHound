@@ -1,6 +1,14 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import Blog from "./Blog";
 import axios from "axios";
+import {
+  Paper,
+  Box,
+  TextField,
+  Grid,
+  Button,
+  Typography,
+} from "@material-ui/core";
 
 export interface BlogModel {
   blogId: number;
@@ -74,31 +82,39 @@ const Blogs: React.FC = () => {
         </ul>
       )}
 
-      <div>
-        <span>Owner: </span>
-        <input
-          type="text"
-          value={owner}
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            setOwner(event.target.value)
-          }
-        />
-      </div>
+      <Paper elevation={5}>
+        <Box p={2}>
+          <Typography variant="h5">Add Blog</Typography>
 
-      <div>
-        <span>Title: </span>
-        <input
-          type="text"
-          value={title}
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
-            setTitle(event.target.value)
-          }
-        />
-      </div>
-
-      <div>
-        <button onClick={addBlog}>Add Blog</button>
-      </div>
+          <Grid container direction="column">
+            <Grid item>
+              <TextField
+                label="Owner"
+                value={owner}
+                onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                  setOwner(event.target.value)
+                }
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                label="Title"
+                value={title}
+                onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                  setTitle(event.target.value)
+                }
+              />
+            </Grid>
+          </Grid>
+          <Grid item>
+            <Box mt={2}>
+              <Button variant="contained" color="primary" onClick={addBlog}>
+                Add Blog
+              </Button>
+            </Box>
+          </Grid>
+        </Box>
+      </Paper>
     </div>
   );
 };
