@@ -4,14 +4,16 @@ using FoxHound.App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FoxHound.App.Data.Migrations
 {
     [DbContext(typeof(FoxHoundData))]
-    partial class FoxHoundDataModelSnapshot : ModelSnapshot
+    [Migration("20200331144215_AddPostComments")]
+    partial class AddPostComments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

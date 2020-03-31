@@ -4,14 +4,16 @@ using FoxHound.App.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FoxHound.App.Data.Migrations
 {
     [DbContext(typeof(FoxHoundData))]
-    partial class FoxHoundDataModelSnapshot : ModelSnapshot
+    [Migration("20200331140156_AddBlogTitle")]
+    partial class AddBlogTitle
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,35 +46,6 @@ namespace FoxHound.App.Data.Migrations
                     b.ToTable("Blogs");
                 });
 
-            modelBuilder.Entity("FoxHound.App.Domain.Comment", b =>
-                {
-                    b.Property<int>("CommentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Author")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CommentId");
-
-                    b.HasIndex("PostId");
-
-                    b.ToTable("Comments");
-                });
-
             modelBuilder.Entity("FoxHound.App.Domain.Post", b =>
                 {
                     b.Property<int>("PostId")
@@ -100,15 +73,6 @@ namespace FoxHound.App.Data.Migrations
                     b.HasIndex("BlogId");
 
                     b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("FoxHound.App.Domain.Comment", b =>
-                {
-                    b.HasOne("FoxHound.App.Domain.Post", null)
-                        .WithMany("Comments")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("FoxHound.App.Domain.Post", b =>

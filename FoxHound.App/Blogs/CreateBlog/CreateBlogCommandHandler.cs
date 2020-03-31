@@ -17,7 +17,7 @@ namespace FoxHound.App.Blogs.CreateBlog
 
         public async Task<int> Handle(CreateBlogCommand request, CancellationToken cancellationToken)
         {
-            Blog blog = new Blog(request.Owner);
+            Blog blog = new Blog(request.Title, request.Owner);
             _foxHoundData.Blogs.Add(blog);
             await _foxHoundData.SaveChangesAsync(cancellationToken);
 
