@@ -5,12 +5,12 @@ namespace FoxHound.App.Domain
 {
     public class Post
     {
-        public Post(string title)
+        public Post(string title, string content)
         {
             PostId = 0;
             BlogId = 0;
             Title = title;
-            Content = string.Empty;
+            Content = content;
             CreatedDate = DateTime.Now;
             Comments = new List<Comment>();
         }

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using FoxHound.App.Blogs.Common;
+using MediatR;
 using System.Collections.Generic;
 
 namespace FoxHound.App.Blogs.GetAllBlogs
