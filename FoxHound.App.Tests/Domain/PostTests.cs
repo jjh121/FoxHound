@@ -21,15 +21,16 @@ namespace FoxHound.App.Tests.Domain
         {
             // Arrange
             var title = _fixture.Create<string>();
+            var content = _fixture.Create<string>();
 
             // Act
-            var result = new Post(title);
+            var result = new Post(title, content);
 
             // Assert
             Assert.Equal(0, result.PostId);
             Assert.Equal(0, result.BlogId);
             Assert.Equal(title, result.Title);
-            Assert.Equal(string.Empty, result.Content);
+            Assert.Equal(content, result.Content);
             Assert.True(DateTime.Now >= result.CreatedDate);
             Assert.NotNull(result.Comments);
             Assert.Empty(result.Comments);
