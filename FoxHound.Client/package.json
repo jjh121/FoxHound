@@ -16,7 +16,14 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "react": "^16.13.1",
+    "react-app-polyfill": "^1.0.6",
     "react-dom": "^16.13.1"
-  }
+  },
+  "browerslist": [
+    "last 1 Chrome versions",
+    "last 1 Edge versions",
+    "IE 11"
+  ]
 }
