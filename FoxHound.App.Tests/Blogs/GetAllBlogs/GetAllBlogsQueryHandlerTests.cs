@@ -52,6 +52,7 @@ namespace FoxHound.App.Tests.Blogs.GetAllBlogs
         {
             // Arrange
             var blog = _fixture.Create<Blog>();
+            _fixture.AddManyTo(blog.Posts);
 
             _foxHoundData.Blogs.Add(blog);
             await _foxHoundData.SaveChangesAsync();
@@ -70,6 +71,8 @@ namespace FoxHound.App.Tests.Blogs.GetAllBlogs
             Assert.Equal(blog.Title, blogResult.Title);
             Assert.Equal(blog.Owner, blogResult.Owner);
             Assert.Equal(blog.CreatedDate, blogResult.CreatedDate);
+            Assert.NotEmpty(blogResult.Posts);
+            Assert.Equal(blog.Posts.Count, blogResult.Posts.Count);
         }
     }
 }

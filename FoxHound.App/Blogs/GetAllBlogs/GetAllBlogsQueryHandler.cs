@@ -1,4 +1,6 @@
-﻿using FoxHound.App.Data;
+﻿using FoxHound.App.Blogs.Common;
+using FoxHound.App.Data;
+using FoxHound.App.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -19,15 +21,20 @@ namespace FoxHound.App.Blogs.GetAllBlogs
 
         public async Task<List<BlogResult>> Handle(GetAllBlogsQuery request, CancellationToken cancellationToken)
         {
-            List<BlogResult> blogs = await _foxHoundData.Blogs
+            List<Blog> blogs = await _foxHoundData.Blogs
+                    .Include(x => x.Posts)
+                    .ToListAsync(cancellationToken);
+
+            List<BlogResult> blogResults = blogs
                 .Select(x => new BlogResult(
                     x.BlogId,
                     x.Title,
                     x.Owner,
-                    x.CreatedDate))
-                .ToListAsync(cancellationToken);
+                    x.CreatedDate,
+                    x.Posts.Select(post => new PostSummary(post.PostId, post.Title, post.CreatedDate)).ToList()))
+                .ToList();
 
-            return blogs;
+            return blogResults;
         }
     }
 }
