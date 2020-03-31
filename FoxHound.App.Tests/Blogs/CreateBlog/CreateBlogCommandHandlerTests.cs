@@ -1,4 +1,4 @@
-using AutoFixture;
+﻿using AutoFixture;
 using AutoFixture.AutoMoq;
 using FoxHound.App.Blogs.CreateBlog;
 using FoxHound.App.Data;
@@ -32,7 +32,6 @@ namespace FoxHound.App.Tests.Blogs.CreateBlog
         {
             // Arrange
             var command = _fixture.Create<CreateBlogCommand>();
-
             var handler = _fixture.Create<CreateBlogCommandHandler>();
 
             // Act
@@ -43,6 +42,7 @@ namespace FoxHound.App.Tests.Blogs.CreateBlog
             {
                 var result = await foxHoundData.Blogs.SingleAsync();
 
+                Assert.Equal(command.Title, result.Title);
                 Assert.Equal(command.Owner, result.Owner);
                 Assert.True(result.BlogId > 0);
             }
@@ -53,7 +53,6 @@ namespace FoxHound.App.Tests.Blogs.CreateBlog
         {
             // Arrange
             var command = _fixture.Create<CreateBlogCommand>();
-
             var handler = _fixture.Create<CreateBlogCommandHandler>();
 
             // Act

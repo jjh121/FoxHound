@@ -22,6 +22,7 @@ namespace FoxHound.App.Blogs.GetAllBlogs
             List<BlogResult> blogs = await _foxHoundData.Blogs
                 .Select(x => new BlogResult(
                     x.BlogId,
+                    x.Title,
                     x.Owner,
                     x.CreatedDate))
                 .ToListAsync(cancellationToken);

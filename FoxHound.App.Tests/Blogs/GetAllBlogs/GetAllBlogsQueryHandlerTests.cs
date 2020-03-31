@@ -1,4 +1,4 @@
-using AutoFixture;
+﻿using AutoFixture;
 using AutoFixture.AutoMoq;
 using FoxHound.App.Blogs.GetAllBlogs;
 using FoxHound.App.Data;
@@ -45,6 +45,31 @@ namespace FoxHound.App.Tests.Blogs.GetAllBlogs
 
             // Assert
             Assert.Equal(blogs.Count, result.Count);
+        }
+
+        [Fact]
+        public async Task Handle_GetAllBlogs_MapsResultCorrectly()
+        {
+            // Arrange
+            var blog = _fixture.Create<Blog>();
+
+            _foxHoundData.Blogs.Add(blog);
+            await _foxHoundData.SaveChangesAsync();
+
+            var handler = _fixture.Create<GetAllBlogsQueryHandler>();
+
+            // Act
+            var result = await handler.Handle(new GetAllBlogsQuery(), It.IsAny<CancellationToken>());
+
+            // Assert
+            Assert.Single(result);
+
+            var blogResult = result.Single();
+
+            Assert.Equal(blog.BlogId, blogResult.BlogId);
+            Assert.Equal(blog.Title, blogResult.Title);
+            Assert.Equal(blog.Owner, blogResult.Owner);
+            Assert.Equal(blog.CreatedDate, blogResult.CreatedDate);
         }
     }
 }

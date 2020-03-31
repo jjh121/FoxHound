@@ -9,6 +9,7 @@ namespace FoxHound.App.Data.Configurations
         public void Configure(EntityTypeBuilder<Blog> builder)
         {
             builder.HasKey(x => x.BlogId);
+            builder.Property(x => x.Title).IsRequired().HasMaxLength(128);
             builder.Property(x => x.Owner).IsRequired().HasMaxLength(20);
             builder.Property(x => x.CreatedDate).IsRequired();
 
