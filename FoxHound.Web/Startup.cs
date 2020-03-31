@@ -18,6 +18,8 @@ namespace FoxHound.Web
         // Application assembly used for dependency resolution of Mediatr and FluentValidation.
         private const string ApplicationAssemblyName = "FoxHound.App";
 
+        private const string LocalCorsPolicy = "LocalCorsPolicy";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -28,6 +30,16 @@ namespace FoxHound.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(LocalCorsPolicy, builder =>
+                {
+                    builder.WithOrigins("http://localhost:1234");
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyHeader();
+                });
+            });
+
             services.AddControllers();
 
             string connectionString = Configuration.GetConnectionString("FoxHoundConnection");
@@ -52,6 +64,7 @@ namespace FoxHound.Web
         {
             if (env.IsDevelopment())
             {
+                app.UseCors(LocalCorsPolicy);
                 app.UseDeveloperExceptionPage();
             }
 
