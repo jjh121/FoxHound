@@ -1,3 +1,4 @@
+using FluentValidation;
 using FoxHound.App.Data;
 using FoxHound.App.Utility;
 using MediatR;
@@ -14,6 +15,9 @@ namespace FoxHound.Web
 {
     public class Startup
     {
+        // Application assembly used for dependency resolution of Mediatr and FluentValidation.
+        private const string ApplicationAssemblyName = "FoxHound.App";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,9 +34,11 @@ namespace FoxHound.Web
             services.AddDbContext<FoxHoundData>(options => options.UseSqlServer(connectionString));
             services.AddScoped<IFoxHoundData, FoxHoundData>();
 
+            services.AddValidatorsFromAssembly(Assembly.Load(ApplicationAssemblyName));
+
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingPipelineBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationPipelineBehavior<,>));
-            services.AddMediatR(Assembly.Load("FoxHound.App"));
+            services.AddMediatR(Assembly.Load(ApplicationAssemblyName));
 
             services.AddSwaggerGen(c =>
             {
