@@ -14,6 +14,8 @@ namespace FoxHound.App.Data.Configurations
             builder.Property(x => x.Content);
             builder.Property(x => x.CreatedDate).IsRequired();
 
+            builder.HasMany(x => x.Comments).WithOne().HasForeignKey(x => x.PostId);
+
             builder.ToTable("Posts");
         }
     }

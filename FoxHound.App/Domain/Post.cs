@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace FoxHound.App.Domain
 {
@@ -11,6 +12,7 @@ namespace FoxHound.App.Domain
             Title = title;
             Content = string.Empty;
             CreatedDate = DateTime.Now;
+            Comments = new List<Comment>();
         }
 
         public int PostId { get; }
@@ -18,5 +20,7 @@ namespace FoxHound.App.Domain
         public string Title { get; }
         public string Content { get; }
         public DateTime CreatedDate { get; }
+
+        public IList<Comment> Comments { get; }
     }
 }
