@@ -1,4 +1,4 @@
-using FluentValidation;
+﻿using FluentValidation;
 using FoxHound.App.Data;
 using FoxHound.App.Utility;
 using MediatR;
@@ -47,6 +47,7 @@ namespace FoxHound.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Cannot be marked static as it is part of the .NET Core startup")]
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
