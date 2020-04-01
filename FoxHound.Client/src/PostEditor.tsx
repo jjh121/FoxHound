@@ -1,39 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import MarkdownEditor from "react-simplemde-editor";
 import EasyMDE from "easymde";
+import hljs from "highlight.js";
+
 import "easymde/dist/easymde.min.css";
+import "highlight.js/styles/solarized-light.css";
 
 const PostEditor: React.FC = () => {
   const [content, setContent] = useState<string>("## Testing");
-  const [easyMdeInstance, setEasyMdeInstance] = useState<EasyMDE>(null);
-
-  //   useEffect(() => {
-  //     if (easyMdeInstance === null) {
-  //       return;
-  //     }
-
-  //     EasyMDE.togglePreview(easyMdeInstance);
-  //   }, [content]);
 
   return (
     <div>
       <MarkdownEditor
-        options={{}}
+        options={{
+          hideIcons: ["guide"],
+          showIcons: ["code", "strikethrough", "table", "horizontal-rule"],
+          renderingConfig: { codeSyntaxHighlighting: true, hljs: hljs },
+        }}
         value={content}
         onChange={(value) => setContent(value)}
       />
 
       <MarkdownEditor
         getMdeInstance={(instance) => {
-          setEasyMdeInstance(instance);
           EasyMDE.togglePreview(instance);
         }}
-        options={{ toolbar: false, status: false }}
+        options={{
+          toolbar: false,
+          status: false,
+          renderingConfig: { codeSyntaxHighlighting: true, hljs: hljs },
+        }}
         value={content}
-        //onChange={(value) => setContent(value)}
       />
-
-      <div>{content}</div>
     </div>
   );
 };
