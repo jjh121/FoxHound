@@ -18,7 +18,7 @@ const Blogs: React.FC = () => {
     getBlogs();
   }, []);
 
-  const refreshBlogList = () => {
+  const handleBlogAdded = (newBlogId: number) => {
     getBlogs();
   };
 
@@ -56,7 +56,7 @@ const Blogs: React.FC = () => {
         </ul>
       )}
 
-      <AddBlog refreshBlogList={refreshBlogList} />
+      <AddBlog handleBlogAdded={handleBlogAdded} />
     </div>
   );
 };

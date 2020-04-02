@@ -1,16 +1,18 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import Paper from "@material-ui/core/Paper";
-import Container from "@material-ui/core/Container";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
+import {
+  TextField,
+  Button,
+  Grid,
+  Paper,
+  Container,
+  Box,
+  Typography,
+} from "@material-ui/core/";
 
 interface IProps {
-  refreshBlogList: () => void;
+  handleBlogAdded: (newBlogId: number) => void;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -24,9 +26,7 @@ const AddBlog: React.FC<IProps> = (props) => {
   const [title, setTitle] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const { refreshBlogList } = props;
-
-  useEffect(() => {}, []);
+  const { handleBlogAdded } = props;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -45,7 +45,7 @@ const AddBlog: React.FC<IProps> = (props) => {
       setOwner("");
       setTitle("");
       setError("");
-      refreshBlogList();
+      handleBlogAdded(blogId);
     } catch (ex) {
       setError(ex.message);
     } finally {
