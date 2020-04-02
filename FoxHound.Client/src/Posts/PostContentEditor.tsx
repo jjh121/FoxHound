@@ -6,34 +6,34 @@ import hljs from "highlight.js";
 import "easymde/dist/easymde.min.css";
 import "highlight.js/styles/solarized-light.css";
 
-const PostEditor: React.FC = () => {
-  const [content, setContent] = useState<string>("## Testing");
+interface IProps {
+  id: string;
+  content: string;
+  setContent: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const PostContentEditor: React.FC<IProps> = (props) => {
+  const { id, content, setContent } = props;
 
   return (
     <div>
       <MarkdownEditor
+        id={id}
         options={{
           hideIcons: ["guide"],
           showIcons: ["code", "strikethrough", "table", "horizontal-rule"],
           renderingConfig: { codeSyntaxHighlighting: true, hljs: hljs },
+          autosave: {
+            enabled: true,
+            uniqueId: id,
+          },
+          //previewClass: "background-color: red;",
         }}
         value={content}
         onChange={(value) => setContent(value)}
-      />
-
-      <MarkdownEditor
-        getMdeInstance={(instance) => {
-          EasyMDE.togglePreview(instance);
-        }}
-        options={{
-          toolbar: false,
-          status: false,
-          renderingConfig: { codeSyntaxHighlighting: true, hljs: hljs },
-        }}
-        value={content}
       />
     </div>
   );
 };
 
-export default PostEditor;
+export default PostContentEditor;

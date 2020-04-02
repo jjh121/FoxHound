@@ -9,7 +9,7 @@ import {
   Button,
   Typography,
 } from "@material-ui/core";
-import PostEditor from "./PostEditor";
+import AddPost from "./Posts/AddPost";
 
 export interface BlogModel {
   blogId: number;
@@ -117,13 +117,9 @@ const Blogs: React.FC = () => {
         </Box>
       </Paper>
 
-      <Box my={3}></Box>
-
-      <Paper elevation={5}>
-        <Box p={3}>
-          <PostEditor />
-        </Box>
-      </Paper>
+      <Box my={3}>
+        <AddPost />
+      </Box>
     </div>
   );
 };
