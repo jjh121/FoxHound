@@ -1,4 +1,5 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core";
 import MarkdownEditor from "react-simplemde-editor";
 import EasyMDE from "easymde";
 import hljs from "highlight.js";
@@ -24,7 +25,6 @@ const PostContentViewer: React.FC<IProps> = (props) => {
             toolbar: false,
             status: false,
             renderingConfig: { codeSyntaxHighlighting: true, hljs: hljs },
-            //previewClass: "background-color: red;",
           }}
           value={content}
         />
