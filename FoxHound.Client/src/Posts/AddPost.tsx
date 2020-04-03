@@ -88,8 +88,6 @@ const AddPost: React.FC = () => {
           </Paper>
         </Container>
       </form>
-
-      <PostContentViewer content={content} />
     </div>
   );
 };
