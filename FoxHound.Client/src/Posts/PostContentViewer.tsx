@@ -1,5 +1,4 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
 import MarkdownEditor from "react-simplemde-editor";
 import EasyMDE from "easymde";
 import hljs from "highlight.js";

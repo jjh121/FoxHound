@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import MarkdownEditor from "react-simplemde-editor";
-import EasyMDE from "easymde";
 import hljs from "highlight.js";
 
 import "easymde/dist/easymde.min.css";
