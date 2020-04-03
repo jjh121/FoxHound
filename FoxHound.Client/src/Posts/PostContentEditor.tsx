@@ -27,7 +27,6 @@ const PostContentEditor: React.FC<IProps> = (props) => {
             enabled: true,
             uniqueId: id,
           },
-          //previewClass: "background-color: red;",
         }}
         value={content}
         onChange={(value) => setContent(value)}

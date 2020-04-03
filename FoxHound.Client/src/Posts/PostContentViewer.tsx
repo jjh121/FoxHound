@@ -24,6 +24,7 @@ const PostContentViewer: React.FC<IProps> = (props) => {
             toolbar: false,
             status: false,
             renderingConfig: { codeSyntaxHighlighting: true, hljs: hljs },
+            //previewClass: "background-color: red;",
           }}
           value={content}
         />
