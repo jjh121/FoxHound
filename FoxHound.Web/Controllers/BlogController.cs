@@ -9,9 +9,7 @@ using System.Threading.Tasks;
 
 namespace FoxHound.Web.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class BlogController : ControllerBase
+    public class BlogController : BaseApiController
     {
         private readonly IMediator _mediator;
 

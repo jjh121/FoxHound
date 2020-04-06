@@ -5,9 +5,7 @@ using System.Threading.Tasks;
 
 namespace FoxHound.Web.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class PostController : ControllerBase
+    public class PostController : BaseApiController
     {
         private readonly IMediator _mediator;
 
