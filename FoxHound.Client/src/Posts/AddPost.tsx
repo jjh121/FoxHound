@@ -10,13 +10,16 @@ import {
 } from "@material-ui/core";
 import Axios from "axios";
 import PostContentEditor from "./PostContentEditor";
-import PostContentViewer from "./PostContentViewer";
 
 const AddPost: React.FC = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+
+  const updateContent = (updatedContent: string) => {
+    setContent(updatedContent);
+  };
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -67,7 +70,7 @@ const AddPost: React.FC = () => {
                     <PostContentEditor
                       id="add-post"
                       content={content}
-                      setContent={setContent}
+                      updateContent={updateContent}
                     />
                   </Box>
                 </Grid>

@@ -8,11 +8,11 @@ import "highlight.js/styles/solarized-light.css";
 interface IProps {
   id: string;
   content: string;
-  setContent: React.Dispatch<React.SetStateAction<string>>;
+  updateContent: (value: string) => void;
 }
 
 const PostContentEditor: React.FC<IProps> = (props) => {
-  const { id, content, setContent } = props;
+  const { id, content, updateContent } = props;
 
   return (
     <div>
@@ -28,7 +28,7 @@ const PostContentEditor: React.FC<IProps> = (props) => {
           },
         }}
         value={content}
-        onChange={(value) => setContent(value)}
+        onChange={(value) => updateContent(value)}
       />
     </div>
   );
