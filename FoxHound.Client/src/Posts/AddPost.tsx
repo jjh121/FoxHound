@@ -27,7 +27,7 @@ const AddPost: React.FC = () => {
     try {
       setIsSubmitting(true);
       const response = await Axios.post<number>(
-        "https://localhost:44360/Post/Create",
+        `${process.env.API_URL}/Post/Create`,
         {
           blogId: 1,
           title: title,

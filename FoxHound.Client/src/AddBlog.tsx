@@ -34,7 +34,7 @@ const AddBlog: React.FC<IProps> = (props) => {
     try {
       setIsSubmitting(true);
       const response = await axios.post<number>(
-        "https://localhost:44360/Blog/Create",
+        `${process.env.API_URL}/Blog/Create`,
         {
           title: title,
           owner: owner,

@@ -10,6 +10,7 @@
   "license": "ISC",
   "devDependencies": {
     "@types/highlight.js": "^9.12.3",
+    "@types/node": "^13.11.0",
     "@types/react": "^16.9.29",
     "@types/react-dom": "^16.9.5",
     "parcel-bundler": "^1.12.4",

@@ -29,7 +29,7 @@ const Blogs: React.FC = () => {
       setIsLoading(true);
 
       const response = await axios.get<BlogModel[]>(
-        "https://localhost:44360/Blog/GetAll"
+        `${process.env.API_URL}/Blog/GetAll`
       );
 
       setBlogs(response.data);
