@@ -20,13 +20,14 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
-import Blogs from "../Blogs";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
 import DesktopWindowsIcon from "@material-ui/icons/DesktopWindows";
-import { Switch, Route } from "react-router-dom";
+import { Link } from "react-router-dom";
+import BathtubIcon from "@material-ui/icons/Bathtub";
+import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
+import PostAddIcon from "@material-ui/icons/PostAdd";
+import Content from "../Content";
 
 const drawerWidth = 240;
 
@@ -92,7 +93,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export default function NavDrawer() {
+const NavDrawer: React.FC = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -149,35 +150,49 @@ export default function NavDrawer() {
         </div>
         <Divider />
         <List>
-          <ListItem>
+          <ListItem button key="My Blogs">
             <ListItemIcon>
               <VisibilityIcon />
             </ListItemIcon>
-            <ListItemText>Blogs</ListItemText>
+            <ListItemText>My Blogs</ListItemText>
           </ListItem>
-          <ListItem>
+
+          <ListItem button component={Link} to="/blogs">
             <ListItemIcon>
-              <VisibilityIcon />
+              <EmojiPeopleIcon />
             </ListItemIcon>
-            <ListItemText>Blogs</ListItemText>
+            <ListItemText>View All Blogs</ListItemText>
           </ListItem>
-          <ListItem>
+
+          <ListItem button key="Edit Blogs">
             <ListItemIcon>
-              <VisibilityIcon />
+              <EditIcon />
             </ListItemIcon>
-            <ListItemText>Blogs</ListItemText>
+            <ListItemText>Edit Blogs</ListItemText>
+          </ListItem>
+
+          <ListItem button component={Link} to="/addPost">
+            <ListItemIcon>
+              <PostAddIcon />
+            </ListItemIcon>
+            <ListItemText>Add Post</ListItemText>
+          </ListItem>
+
+          <ListItem button key="Other Cool Stuff">
+            <ListItemIcon>
+              <DesktopWindowsIcon />
+            </ListItemIcon>
+            <ListItemText>Other Cool Stuff</ListItemText>
           </ListItem>
         </List>
         <Divider />
         <List>
-          {["Log In"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          <ListItem button key="Log In">
+            <ListItemIcon>
+              <BathtubIcon />
+            </ListItemIcon>
+            <ListItemText>Log In</ListItemText>
+          </ListItem>
         </List>
       </Drawer>
       <main
@@ -186,14 +201,11 @@ export default function NavDrawer() {
         })}
       >
         <div className={classes.drawerHeader} />
-        <Typography>
-          <Switch>
-            <Route path="/blogs">
-              <Blogs />
-            </Route>
-          </Switch>
-        </Typography>
+
+        <Content />
       </main>
     </div>
   );
-}
+};
+
+export default NavDrawer;
