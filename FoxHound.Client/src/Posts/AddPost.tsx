@@ -25,22 +25,19 @@ const AddPost: React.FC = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const tempId = blogId;
-    console.log(blogId);
+
     try {
       setIsSubmitting(true);
       const response = await Axios.post<number>(
         `${process.env.API_URL}/Post/Create`,
         {
-          //Look into getting the blog ID from the route
-
-          blogdId: tempId,
+          blogdId: blogId,
           title: title,
           content: content,
         }
       );
 
-      const blogId = response.data;
+      const postId = response.data;
       setTitle("");
       setContent("");
       setError("");

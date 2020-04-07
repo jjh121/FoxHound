@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "parcel src/index.html",
-    "start": "parcel src/index.html"
+    "start": "npm run dev"
   },
   "author": "",
   "license": "ISC",
@@ -21,7 +21,6 @@
   "dependencies": {
     "@material-ui/core": "^4.9.8",
     "@material-ui/icons": "^4.9.1",
-    "@material/top-app-bar": "^5.1.0",
     "axios": "^0.19.2",
     "easymde": "^2.9.0",
     "highlight.js": "^9.18.1",
