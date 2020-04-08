@@ -42,6 +42,7 @@ namespace FoxHound.Web
                 });
             });
 
+            services.AddApplicationInsightsTelemetry();
             services.AddControllers();
 
             string connectionString = Configuration.GetConnectionString("FoxHoundConnection");
