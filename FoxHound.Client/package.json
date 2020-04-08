@@ -4,7 +4,8 @@
   "description": "TrainingApp",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel src/index.html"
+    "dev": "parcel src/index.html",
+    "start": "npm run dev"
   },
   "author": "",
   "license": "ISC",
@@ -26,6 +27,7 @@
     "react": "^16.13.1",
     "react-app-polyfill": "^1.0.6",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2",
     "react-simplemde-editor": "^4.1.0"
   },
   "browerslist": [

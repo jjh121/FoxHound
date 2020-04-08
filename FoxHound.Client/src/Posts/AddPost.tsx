@@ -10,12 +10,14 @@ import {
 } from "@material-ui/core";
 import Axios from "axios";
 import PostContentEditor from "./PostContentEditor";
+import { useParams } from "react-router-dom";
 
 const AddPost: React.FC = () => {
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
+  const { blogId } = useParams();
 
   const updateContent = (updatedContent: string) => {
     setContent(updatedContent);
@@ -29,13 +31,13 @@ const AddPost: React.FC = () => {
       const response = await Axios.post<number>(
         `${process.env.API_URL}/Post/Create`,
         {
-          blogId: 1,
+          blogdId: blogId,
           title: title,
           content: content,
         }
       );
 
-      const blogId = response.data;
+      const postId = response.data;
       setTitle("");
       setContent("");
       setError("");

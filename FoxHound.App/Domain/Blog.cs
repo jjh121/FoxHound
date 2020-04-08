@@ -18,7 +18,6 @@ namespace FoxHound.App.Domain
         public string Title { get; }
         public string Owner { get; }
         public DateTime CreatedDate { get; }
-
         public IList<Post> Posts { get; }
     }
 }

@@ -2,14 +2,14 @@ import "react-app-polyfill/stable";
 
 import React from "react";
 import ReactDOM from "react-dom";
-import Blogs from "./Blogs";
+import NavDrawer from "./Navigation/NavDrawer";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const App: React.FC = () => {
   return (
-    <>
-      <div>Hello from react</div>
-      <Blogs />
-    </>
+    <Router>
+      <NavDrawer />
+    </Router>
   );
 };
 
