@@ -20,7 +20,7 @@ const Content: React.FC = () => {
       </Route>
 
       <Route path="/">
-        <AddPost />
+        <Blogs />
       </Route>
     </Switch>
   );

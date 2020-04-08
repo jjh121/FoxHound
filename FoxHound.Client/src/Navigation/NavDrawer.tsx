@@ -166,7 +166,7 @@ const NavDrawer: React.FC = () => {
             <ListItemText>View All Blogs</ListItemText>
           </ListItem>
 
-          <ListItem>
+          <ListItem button component={Link} to="/">
             <ListItemIcon>
               <EditIcon />
             </ListItemIcon>
@@ -180,16 +180,16 @@ const NavDrawer: React.FC = () => {
             <ListItemText>Add Post</ListItemText>
           </ListItem>
 
-          <ListItem>
+          <ListItem button component={Link} to="/">
             <ListItemIcon>
               <DesktopWindowsIcon />
             </ListItemIcon>
-            <ListItemText>Other Cool Stuff</ListItemText>
+            <ListItemText>Add Blog</ListItemText>
           </ListItem>
         </List>
         <Divider />
         <List>
-          <ListItem>
+          <ListItem button component={Link} to="/">
             <ListItemIcon>
               <BathtubIcon />
             </ListItemIcon>
