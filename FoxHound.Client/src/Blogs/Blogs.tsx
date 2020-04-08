@@ -1,9 +1,6 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import Blog from "./Blog";
 import axios from "axios";
-import AddBlog from "./AddBlog";
-import { Box } from "@material-ui/core";
-import AddPost from "./Posts/AddPost";
 
 export interface BlogModel {
   blogId: number;
@@ -57,12 +54,6 @@ const Blogs: React.FC = () => {
           ))}
         </ul>
       )}
-
-      <AddBlog handleBlogAdded={handleBlogAdded} />
-
-      <Box my={3}>
-        <AddPost />
-      </Box>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
-import Blogs from "../Blogs";
-import AddBlog from "../AddBlog";
+import Blogs from "../Blogs/Blogs";
+import AddBlog from "../Blogs/AddBlog";
 import AddPost from "../Posts/AddPost";
 
 const Content: React.FC = () => {
@@ -11,7 +11,7 @@ const Content: React.FC = () => {
         <Blogs />
       </Route>
 
-      <Route path="/addBlog">
+      <Route path="addBlog">
         <AddBlog handleBlogAdded={(id: number) => {}} />
       </Route>
 
