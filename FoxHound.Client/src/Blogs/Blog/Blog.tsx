@@ -1,5 +1,5 @@
 import React from "react";
-import { BlogModel } from "./Blogs";
+import { BlogModel } from "../Blogs";
 
 interface IProps {
   blog: BlogModel;
