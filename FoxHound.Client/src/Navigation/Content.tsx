@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Blogs from "../Blogs/Blogs";
-import AddBlog from "../Blogs/Blog/AddBlog";
+import AddBlog from "../Blogs/AddBlog";
 import AddPost from "../Posts/AddPost";
 
 const Content: React.FC = () => {
