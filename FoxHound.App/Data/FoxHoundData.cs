@@ -10,6 +10,8 @@ namespace FoxHound.App.Data
         }
 
         public DbSet<Blog> Blogs { get; set; } = null!;
+        public DbSet<Post> Posts { get; set; } = null!;
+        public DbSet<Comment> Comments { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

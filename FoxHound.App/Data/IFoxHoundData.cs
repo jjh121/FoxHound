@@ -9,6 +9,9 @@ namespace FoxHound.App.Data
     {
         DbSet<Blog> Blogs { get; set; }
 
+        DbSet<Post> Posts { get; set; }
+        DbSet<Comment> Comments { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
