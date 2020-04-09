@@ -10,10 +10,7 @@ import {
   Box,
   Typography,
 } from "@material-ui/core/";
-
-interface IProps {
-  handleBlogAdded: (newBlogId: number) => void;
-}
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,12 +18,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddBlog: React.FC<IProps> = (props) => {
+const AddBlog: React.FC = () => {
   const [owner, setOwner] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const { handleBlogAdded } = props;
+  const history = useHistory();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -41,11 +38,8 @@ const AddBlog: React.FC<IProps> = (props) => {
         }
       );
 
-      const blogId = response.data;
-      setOwner("");
-      setTitle("");
       setError("");
-      handleBlogAdded(blogId);
+      history.push("/");
     } catch (ex) {
       setError(ex.message);
     } finally {
