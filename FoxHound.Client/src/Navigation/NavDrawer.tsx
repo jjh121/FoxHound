@@ -180,7 +180,7 @@ const NavDrawer: React.FC = () => {
             <ListItemText>Add Post</ListItemText>
           </ListItem>
 
-          <ListItem button component={Link} to="/">
+          <ListItem button component={Link} to="/addBlog">
             <ListItemIcon>
               <DesktopWindowsIcon />
             </ListItemIcon>
