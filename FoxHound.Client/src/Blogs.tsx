@@ -8,6 +8,7 @@ import AddPost from "./Posts/AddPost";
 export interface BlogModel {
   blogId: number;
   owner: string;
+  title: string;
   createdDate: Date;
 }
 
