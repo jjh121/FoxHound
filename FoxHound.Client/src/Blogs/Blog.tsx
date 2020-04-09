@@ -1,5 +1,6 @@
 import React from "react";
 import { BlogModel } from "./Blogs";
+import { Link } from "react-router-dom";
 
 interface IProps {
   blog: BlogModel;
@@ -10,7 +11,7 @@ const Blog: React.FC<IProps> = (props) => {
 
   return (
     <div>
-      {blog.owner} | {blog.blogId}
+      <Link to={`/blog/edit/${blog.blogId}`}>Edit</Link> | {blog.owner}
     </div>
   );
 };

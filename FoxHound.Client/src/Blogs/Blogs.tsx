@@ -5,6 +5,7 @@ import axios from "axios";
 export interface BlogModel {
   blogId: number;
   owner: string;
+  title: string;
   createdDate: Date;
 }
 

@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Blogs from "../Blogs/Blogs";
 import AddBlog from "../Blogs/AddBlog";
 import AddPost from "../Posts/AddPost";
+import EditBlog from "../Blogs/EditBlog";
 
 const Content: React.FC = () => {
   return (
@@ -10,12 +11,19 @@ const Content: React.FC = () => {
       <Route path="/blogs">
         <Blogs />
       </Route>
-      <Route path="/addBlog">
-        <AddBlog handleBlogAdded={(id: number) => {}} />
+
+      <Route path="/blog/addBlog">
+        <AddBlog />
       </Route>
       <Route path="/blog/:blogId/addPost">
         <AddPost />
       </Route>
+
+      <Route path="/blog/edit/:blogId">
+        <EditBlog />
+      </Route>
+
+
       <Route path="/">
         <Blogs />
       </Route>
