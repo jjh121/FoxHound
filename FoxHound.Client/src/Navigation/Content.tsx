@@ -15,7 +15,6 @@ const Content: React.FC = () => {
       <Route path="/blog/addBlog">
         <AddBlog />
       </Route>
-
       <Route path="/blog/:blogId/addPost">
         <AddPost />
       </Route>
@@ -23,6 +22,7 @@ const Content: React.FC = () => {
       <Route path="/blog/edit/:blogId">
         <EditBlog />
       </Route>
+
 
       <Route path="/">
         <Blogs />
