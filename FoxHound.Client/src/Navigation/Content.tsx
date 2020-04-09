@@ -12,8 +12,8 @@ const Content: React.FC = () => {
         <Blogs />
       </Route>
 
-      <Route path="addBlog">
-        <AddBlog handleBlogAdded={(id: number) => {}} />
+      <Route path="/blog/addBlog">
+        <AddBlog />
       </Route>
 
       <Route path="/blog/:blogId/addPost">
