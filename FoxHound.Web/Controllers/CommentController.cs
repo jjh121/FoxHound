@@ -9,8 +9,6 @@ using System.Threading.Tasks;
 
 namespace FoxHound.Web.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class CommentController : BaseApiController
     {
         private readonly IMediator _mediator;
@@ -23,8 +21,8 @@ namespace FoxHound.Web.Controllers
         [HttpPost("[action]")]
         public async Task<int> Create(CreateCommentCommand command)
         {
-            int postId = await _mediator.Send(command);
-            return postId;
+            int commentId = await _mediator.Send(command);
+            return commentId;
         }
     }
 }
