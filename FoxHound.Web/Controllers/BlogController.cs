@@ -25,7 +25,7 @@ namespace FoxHound.Web.Controllers
             return result;
         }
 
-        [HttpGet("[action]/blogId:int")]
+        [HttpGet("[action]/{blogId:int}")]
         public async Task<BlogResult> Get(int blogId)
         {
             var result = await _mediator.Send(new GetBlogQuery(blogId));
