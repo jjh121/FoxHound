@@ -4,11 +4,34 @@ import Blogs from "../Blogs/Blogs";
 import AddBlog from "../Blogs/AddBlog";
 import AddPost from "../Posts/AddPost";
 import AddComment from '../Comments/AddComment';
+import Comments, {CommentModel} from "../Comments/Comments";
+
+const fakeComments : CommentModel[] = [
+  {
+    postId: 1,
+    commentId: 1,
+    author: 'Bill',
+    content: 'I like turtles',
+    createdDate: new Date()
+  }, {
+    postId: 1,
+    commentId: 2,
+    author: 'James',
+    content: 'Me too',
+    createdDate: new Date()
+  }, {
+    postId: 1,
+    commentId: 3,
+    author: 'Smith',
+    content: 'I dont',
+    createdDate: new Date()
+  }
+]
 
 const Content : React.FC = () => {
   return (
     <div>
-      <AddComment/>
+      <Comments comments={fakeComments}/>
       <Switch>
         <Route path="/blogs">
           <Blogs/>
@@ -24,7 +47,7 @@ const Content : React.FC = () => {
         </Route>
       </Switch >
     </div>
-  );
-};
+  )
+}
 
 export default Content;
