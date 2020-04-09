@@ -11,7 +11,11 @@ import {
 import Axios from "axios";
 import {useParams} from "react-router-dom";
 
-const AddComment : React.FC = () => {
+interface IProps {
+    postId : number
+}
+
+const AddComment : React.FC < IProps > = (props) => {
     const [author,
         setAuthor] = useState < string > ("");
     const [content,
@@ -20,8 +24,8 @@ const AddComment : React.FC = () => {
         setIsSubmitting] = useState < boolean > (false);
     const [error,
         setError] = useState < string > ("");
-    // const {postId} = useParams();  -- use Post When Exists
-    const postId = 1; // switch to useParams when view Post exists
+
+    const postId = props.postId;
 
     const updateContent = (updatedContent : string) => {
         setContent(updatedContent);
