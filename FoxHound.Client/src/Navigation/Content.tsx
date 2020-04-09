@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import Blogs from "../Blogs/Blogs";
 import AddBlog from "../Blogs/AddBlog";
 import AddPost from "../Posts/AddPost";
-import EditBlog from "../EditBlog";
+import EditBlog from "../Blogs/EditBlog";
 
 const Content: React.FC = () => {
   return (
