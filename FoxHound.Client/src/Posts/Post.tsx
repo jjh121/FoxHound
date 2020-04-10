@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { CommentModel } from "../Comments/Comments";
+import Comments, { CommentModel } from "../Comments/Comments";
 import Axios from "axios";
 import { Container, Paper, Box, Typography } from "@material-ui/core";
 import PostContentViewer from "./PostContentViewer";
+import AddComment from "../Comments/AddComment";
 
 export interface PostModel {
   postId: number;
@@ -47,20 +48,25 @@ const Post: React.FC = () => {
       {isLoading || !post ? (
         <div>Loading...</div>
       ) : (
-        <Container maxWidth="lg">
-          <Paper elevation={5}>
-            <Box p={3}>
-              {error && <div>{error}</div>}
-              <Typography variant="h5">{post.title}</Typography>
-              <Typography variant="caption">
-                {new Date(post.createdDate).toDateString()}
-              </Typography>
-              <Box mt={2}>
-                <PostContentViewer content={post.content} />
+        <>
+          <Container maxWidth="lg">
+            <Paper elevation={5}>
+              <Box p={3}>
+                {error && <div>{error}</div>}
+                <Typography variant="h5">{post.title}</Typography>
+                <Typography variant="caption">
+                  {new Date(post.createdDate).toDateString()}
+                </Typography>
+                <Box mt={2}>
+                  <PostContentViewer content={post.content} />
+                </Box>
               </Box>
-            </Box>
-          </Paper>
-        </Container>
+            </Paper>
+          </Container>
+
+          <AddComment postId={postId} />
+          <Comments comments={post.comments} />
+        </>
       )}
     </div>
   );
