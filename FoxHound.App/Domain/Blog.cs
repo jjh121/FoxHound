@@ -15,9 +15,19 @@ namespace FoxHound.App.Domain
         }
 
         public int BlogId { get; }
-        public string Title { get; }
-        public string Owner { get; }
+        public string Title { get; private set; }
+        public string Owner { get; private set; }
         public DateTime CreatedDate { get; }
         public IList<Post> Posts { get; }
+
+        public void SetTitle(string title)
+        {
+            Title = title;
+        }
+
+        public void SetOwner(string owner)
+        {
+            Owner = owner;
+        }
     }
 }

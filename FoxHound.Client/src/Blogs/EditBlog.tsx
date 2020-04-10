@@ -53,12 +53,22 @@ const EditBlog: React.FC = () => {
   const handleBlogEditSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    setIsSubmitting(true);
-    //TODO API call with next PR, will work on the Update Controller/Command handlers
-    alert("Add Update Blog Call Here");
-    setIsSubmitting(false);
+    try {
+      setIsSubmitting(true);
 
-    history.push("/");
+      await axios.post(`${process.env.API_URL}/Blog/Update`, {
+        blogId: +blogId,
+        title: title,
+        owner: owner,
+      });
+
+      setError("");
+      history.push("/");
+    } catch (ex) {
+      setError(ex.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const classes = useStyles({});
@@ -100,7 +110,7 @@ const EditBlog: React.FC = () => {
                       variant="contained"
                       disabled={isSubmitting}
                     >
-                      Edit Blog
+                      Update Blog
                     </Button>
                   </Box>
                 </Grid>
