@@ -1,7 +1,6 @@
 ﻿using FoxHound.App.Data;
 using FoxHound.App.Domain;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using System.Threading;
 using System.Threading.Tasks;
 
