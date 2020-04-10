@@ -18,8 +18,7 @@ namespace FoxHound.App.Blogs.UpdateBlog
 
         public async Task<Unit> Handle(UpdateBlogCommand request, CancellationToken cancellationToken)
         {
-            Blog blog = await _foxHoundData.Blogs
-                .SingleAsync(x => x.BlogId == request.BlogId, cancellationToken);
+            Blog blog = await _foxHoundData.Blogs.FindAsync(request.BlogId);
 
             blog.SetOwner(request.Owner);
             blog.SetTitle(request.Title);
