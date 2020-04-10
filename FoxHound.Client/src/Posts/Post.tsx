@@ -53,6 +53,7 @@ const Post: React.FC = () => {
             <Paper elevation={5}>
               <Box p={3}>
                 {error && <div>{error}</div>}
+                <Typography variant="subtitle1">{`Show blog information for blogId: ${post.blogId}`}</Typography>
                 <Typography variant="h5">{post.title}</Typography>
                 <Typography variant="caption">
                   {new Date(post.createdDate).toDateString()}
