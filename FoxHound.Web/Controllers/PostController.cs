@@ -23,7 +23,7 @@ namespace FoxHound.Web.Controllers
             return postId;
         }
 
-        [HttpPost("[action]/{postId:int}")]
+        [HttpGet("[action]/{postId:int}")]
         public async Task<PostResult> Get(int postId)
         {
             PostResult post = await _mediator.Send(new GetPostQuery(postId));
