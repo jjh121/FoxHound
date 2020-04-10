@@ -35,7 +35,7 @@ const AddComment: React.FC<IProps> = (props) => {
       const response = await Axios.post<number>(
         `${process.env.API_URL}/Comment/Create`,
         {
-          postId: postId,
+          postId: +postId,
           author: author,
           content: content,
         }
