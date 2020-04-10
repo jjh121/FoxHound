@@ -41,6 +41,12 @@ const Post: React.FC = () => {
     }
   };
 
+  const commentAdded = (comment: CommentModel) => {
+    const postCopy = { ...post };
+    postCopy.comments.push(comment);
+    setPost(postCopy);
+  };
+
   return (
     <div>
       {error && <div>{error}</div>}
@@ -65,7 +71,7 @@ const Post: React.FC = () => {
             </Paper>
           </Container>
 
-          <AddComment postId={postId} />
+          <AddComment postId={postId} commentAddedSuccessfully={commentAdded} />
           <Comments comments={post.comments} />
         </>
       )}
