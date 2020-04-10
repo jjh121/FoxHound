@@ -20,7 +20,6 @@ namespace FoxHound.App.Blogs.GetPost
 
         public async Task<PostResult> Handle(GetPostQuery request, CancellationToken cancellationToken)
         {
-            // TODO: tests
             Post post = await _foxHoundData.Posts
                 .Include(x => x.Comments)
                 .SingleOrDefaultAsync(x => x.PostId == request.PostId, cancellationToken);
