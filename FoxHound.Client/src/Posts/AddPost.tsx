@@ -31,7 +31,7 @@ const AddPost: React.FC = () => {
       const response = await Axios.post<number>(
         `${process.env.API_URL}/Post/Create`,
         {
-          blogdId: blogId,
+          blogId: +blogId,
           title: title,
           content: content,
         }
