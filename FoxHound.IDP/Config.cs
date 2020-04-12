@@ -61,44 +61,15 @@ namespace FoxHound.IDP
                     RequireClientSecret = false,
                     RequireConsent = false,
 
-                        PostLogoutRedirectUris = new List<string>
-                    {
-                        //"https://localhost:44389/signout-callback-oidc"
-                    },
-                    RedirectUris = new List<string>( )
-                    {
-                       // "https://localhost:44389/signin-oidc"
-                    },
+                    RedirectUris =           { "http://localhost:1234/callback.html" },
+                    PostLogoutRedirectUris = { "http://localhost:1234/index.html" },
+                    AllowedCorsOrigins =     { "http://localhost:1234" },
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.OpenId,
                         "foxhound.read_only",
                         "foxhound.full_access"
-                    },
-                    AllowedCorsOrigins = { "http://localhost:5003" }
-                },
-                new Client()
-                {
-                    ClientName = "FoxHound Implicit",
-                    ClientId = "foxhound2",
-                    AllowedGrantTypes = GrantTypes.Implicit,
-                    PostLogoutRedirectUris = new List<string>
-                    {
-                        //"https://localhost:44389/signout-callback-oidc"
-                    },
-                    RedirectUris = new List<string>( )
-                    {
-                        // "https://localhost:44389/signin-oidc"
-                    },
-                    AllowedScopes =
-                    {
-                        IdentityServerConstants.StandardScopes.Profile,
-                        IdentityServerConstants.StandardScopes.OpenId
-                    },
-                    ClientSecrets =
-                    {
-                        new Secret("secret".Sha256())  // use different for production
                     }
                 }
             };
