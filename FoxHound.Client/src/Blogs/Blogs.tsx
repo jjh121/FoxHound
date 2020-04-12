@@ -1,11 +1,11 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import Blog from "./Blog";
 import axios from "axios";
-import AddBlog from "./AddBlog";
 
 export interface BlogModel {
   blogId: number;
   owner: string;
+  title: string;
   createdDate: Date;
 }
 
@@ -27,7 +27,7 @@ const Blogs: React.FC = () => {
       setIsLoading(true);
 
       const response = await axios.get<BlogModel[]>(
-        "https://localhost:44360/Blog/GetAll"
+        `${process.env.API_URL}/Blog/GetAll`
       );
 
       setBlogs(response.data);
@@ -55,8 +55,6 @@ const Blogs: React.FC = () => {
           ))}
         </ul>
       )}
-
-      <AddBlog handleBlogAdded={handleBlogAdded} />
     </div>
   );
 };

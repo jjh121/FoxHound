@@ -4,11 +4,13 @@ using FoxHound.App.Utility;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.IO;
 using System.Reflection;
 
 namespace FoxHound.Web
@@ -40,6 +42,7 @@ namespace FoxHound.Web
                 });
             });
 
+            services.AddApplicationInsightsTelemetry();
             services.AddControllers();
 
             string connectionString = Configuration.GetConnectionString("FoxHoundConnection");
@@ -76,6 +79,8 @@ namespace FoxHound.Web
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();
 
@@ -83,6 +88,17 @@ namespace FoxHound.Web
             {
                 endpoints.MapControllers();
             });
+
+            if (!env.IsDevelopment())
+            {
+                // This will allow html5 client routing to continue to work when refreshing/bookmarking a page that is a client route
+                // https://weblog.west-wind.com/posts/2017/aug/07/handling-html5-client-route-fallbacks-in-aspnet-core
+                app.Run(async (context) =>
+                {
+                    context.Response.ContentType = "text/html";
+                    await context.Response.SendFileAsync(Path.Combine(env.WebRootPath, "index.html"));
+                });
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using FoxHound.App.Blogs.CreateBlog;
 using FoxHound.App.Blogs.GetAllBlogs;
 using FoxHound.App.Blogs.GetBlog;
+using FoxHound.App.Blogs.UpdateBlog;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -9,9 +10,7 @@ using System.Threading.Tasks;
 
 namespace FoxHound.Web.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class BlogController : ControllerBase
+    public class BlogController : BaseApiController
     {
         private readonly IMediator _mediator;
 
@@ -27,7 +26,7 @@ namespace FoxHound.Web.Controllers
             return result;
         }
 
-        [HttpGet("[action]/blogId:int")]
+        [HttpGet("[action]/{blogId:int}")]
         public async Task<BlogResult> Get(int blogId)
         {
             var result = await _mediator.Send(new GetBlogQuery(blogId));
@@ -39,6 +38,12 @@ namespace FoxHound.Web.Controllers
         {
             int blogId = await _mediator.Send(command);
             return blogId;
+        }
+
+        [HttpPost("[action]")]
+        public async Task Update(UpdateBlogCommand command)
+        {
+            await _mediator.Send(command);
         }
     }
 }

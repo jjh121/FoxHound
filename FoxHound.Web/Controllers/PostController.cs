@@ -1,13 +1,13 @@
-﻿using FoxHound.App.Blogs.CreatePost;
+﻿using FoxHound.App.Blogs.Common;
+using FoxHound.App.Blogs.CreatePost;
+using FoxHound.App.Blogs.GetPost;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace FoxHound.Web.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class PostController : ControllerBase
+    public class PostController : BaseApiController
     {
         private readonly IMediator _mediator;
 
@@ -21,6 +21,13 @@ namespace FoxHound.Web.Controllers
         {
             int postId = await _mediator.Send(command);
             return postId;
+        }
+
+        [HttpGet("[action]/{postId:int}")]
+        public async Task<PostResult> Get(int postId)
+        {
+            PostResult post = await _mediator.Send(new GetPostQuery(postId));
+            return post;
         }
     }
 }
