@@ -36,13 +36,8 @@ namespace FoxHound.IDP
                         {
                             new Scope()
                             {
-                                Name = "foxhound.full_access",
-                                DisplayName = "Full access to FoxHound API",
-                            },
-                            new Scope
-                            {
-                                Name = "foxhound.read_only",
-                                DisplayName = "Read only access to FoxHound API"
+                                Name = "api",
+                                DisplayName = "Full access to FoxHound API"
                             }
                         }
                     }
@@ -61,15 +56,15 @@ namespace FoxHound.IDP
                     RequireClientSecret = false,
                     RequireConsent = false,
 
-                    RedirectUris =           { "http://localhost:1234/callback.html" },
-                    PostLogoutRedirectUris = { "http://localhost:1234/index.html" },
+                    RedirectUris =           { "http://localhost:1234/signin-callback", "http://localhost:1234/silent-renew" },
+                    PostLogoutRedirectUris = { "http://localhost:1234/" },
                     AllowedCorsOrigins =     { "http://localhost:1234" },
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.OpenId,
-                        "foxhound.read_only",
-                        "foxhound.full_access"
+                        IdentityServerConstants.StandardScopes.Email,
+                        "api"
                     }
                 }
             };

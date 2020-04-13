@@ -25,11 +25,12 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import EditIcon from "@material-ui/icons/Edit";
 import DesktopWindowsIcon from "@material-ui/icons/DesktopWindows";
-import BathtubIcon from "@material-ui/icons/Bathtub";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import PostAddIcon from "@material-ui/icons/PostAdd";
 import { Link } from "react-router-dom";
 import Content from "./Content";
+import LoginButton from "../Authentication/LoginButton";
+import { AuthService } from "../../services/Authentication/AuthService";
 
 const drawerWidth = 240;
 
@@ -95,7 +96,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-const NavDrawer: React.FC = () => {
+interface IProps {
+  authService: AuthService;
+}
+
+const NavDrawer: React.FC<IProps> = ({ authService }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -189,12 +194,11 @@ const NavDrawer: React.FC = () => {
         </List>
         <Divider />
         <List>
-          <ListItem button component={Link} to="/">
-            <ListItemIcon>
-              <BathtubIcon />
-            </ListItemIcon>
-            <ListItemText>Log In</ListItemText>
-          </ListItem>
+          <LoginButton
+            button
+            loggedIn={authService.loggedIn}
+            authService={authService}
+          />
         </List>
       </Drawer>
       <main
