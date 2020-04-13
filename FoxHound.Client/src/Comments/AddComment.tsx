@@ -9,10 +9,11 @@ import {
   Button,
 } from "@material-ui/core";
 import Axios from "axios";
-import { useParams } from "react-router-dom";
+import { CommentModel } from "./Comments";
 
 interface IProps {
   postId: number;
+  commentAddedSuccessfully: (comment: CommentModel) => void;
 }
 
 const AddComment: React.FC<IProps> = (props) => {
@@ -21,18 +22,14 @@ const AddComment: React.FC<IProps> = (props) => {
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
 
-  const postId = props.postId;
-
-  const updateContent = (updatedContent: string) => {
-    setContent(updatedContent);
-  };
+  const { postId, commentAddedSuccessfully } = props;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
       setIsSubmitting(true);
-      const response = await Axios.post<number>(
+      const response = await Axios.post<CommentModel>(
         `${process.env.API_URL}/Comment/Create`,
         {
           postId: +postId,
@@ -41,7 +38,8 @@ const AddComment: React.FC<IProps> = (props) => {
         }
       );
 
-      const commentId = response.data;
+      commentAddedSuccessfully(response.data);
+
       setAuthor("");
       setContent("");
       setError("");
