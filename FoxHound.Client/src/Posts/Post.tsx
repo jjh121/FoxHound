@@ -42,9 +42,11 @@ const Post: React.FC = () => {
   };
 
   const commentAdded = (comment: CommentModel) => {
-    const postCopy = { ...post };
-    postCopy.comments.push(comment);
-    setPost(postCopy);
+    setPost((prevState) => {
+      const postCopy = { ...prevState };
+      postCopy.comments.push(comment);
+      return postCopy;
+    });
   };
 
   return (
