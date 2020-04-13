@@ -14,18 +14,21 @@ import {
   Typography,
   Divider,
   Tooltip,
+  Badge,
 } from "@material-ui/core";
 import PersonIcon from "@material-ui/icons/Person";
 import EditIcon from "@material-ui/icons/Edit";
-import SearchIcon from "@material-ui/icons/Search";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import DescriptionIcon from "@material-ui/icons/Description";
 import { Link } from "react-router-dom";
+import { PostModel } from "../Posts/Post";
 
 export interface BlogModel {
   blogId: number;
   owner: string;
   title: string;
   createdDate: Date;
+  posts: PostModel[];
 }
 
 const Blogs: React.FC = () => {
@@ -77,22 +80,30 @@ const Blogs: React.FC = () => {
           ) : (
             <List dense>
               {blogs.map((blog) => (
-                <>
-                  <ListItem key={blog.blogId}>
+                <React.Fragment key={blog.blogId}>
+                  <ListItem>
                     <ListItemAvatar>
                       <Avatar component={Link} to={`/blog/${blog.blogId}`}>
                         <PersonIcon />
                       </Avatar>
                     </ListItemAvatar>
-                    <ListItemText primary={blog.title} secondary={blog.owner} />
+                    <ListItemText
+                      primary={blog.title}
+                      secondary={blog.owner}
+                    ></ListItemText>
                     <ListItemSecondaryAction>
-                      <Tooltip title="View">
+                      <Tooltip title="Posts">
                         <IconButton
                           edge="end"
                           component={Link}
                           to={`/blog/${blog.blogId}`}
                         >
-                          <SearchIcon />
+                          <Badge
+                            badgeContent={blog.posts.length}
+                            color="primary"
+                          >
+                            <DescriptionIcon />
+                          </Badge>
                         </IconButton>
                       </Tooltip>
                       <Tooltip title="Edit">
@@ -107,7 +118,7 @@ const Blogs: React.FC = () => {
                     </ListItemSecondaryAction>
                   </ListItem>
                   <Divider variant="inset" component="li" />
-                </>
+                </React.Fragment>
               ))}
             </List>
           )}
