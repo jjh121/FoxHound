@@ -55,7 +55,7 @@ namespace FoxHound.IDP
 
                     RequireClientSecret = false,
                     RequireConsent = false,
-
+                    
                     RedirectUris =           { "http://localhost:1234/signin-callback", "http://localhost:1234/silent-renew" },
                     PostLogoutRedirectUris = { "http://localhost:1234/" },
                     AllowedCorsOrigins =     { "http://localhost:1234" },
@@ -68,7 +68,6 @@ namespace FoxHound.IDP
                     }
                 }
             };
-
     }
 }
 

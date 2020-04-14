@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import clsx from "clsx";
 import {
   makeStyles,
@@ -103,7 +103,7 @@ interface IProps {
 const NavDrawer: React.FC<IProps> = ({ authService }) => {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -113,6 +113,18 @@ const NavDrawer: React.FC<IProps> = ({ authService }) => {
     setOpen(false);
   };
 
+  useEffect(() => {
+    console.log("Calling UseEffect");
+    authService.getUser().then((user) => {
+      if (user) {
+        authService.loggedIn = true;
+      } else {
+        authService.loggedIn = false;
+      }
+    });
+  });
+
+  console.info("NavDrawer rendering");
   return (
     <div className={classes.root}>
       <CssBaseline />

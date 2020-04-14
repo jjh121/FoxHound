@@ -11,6 +11,7 @@ const authService = new AuthService();
 
 const App: React.FC = () => {
   useEffect(() => {
+    console.log("Calling UseEffect");
     authService.getUser().then((user) => {
       if (user) {
         authService.loggedIn = true;
@@ -19,7 +20,6 @@ const App: React.FC = () => {
       }
     });
   });
-
   return (
     <Router>
       <Switch>

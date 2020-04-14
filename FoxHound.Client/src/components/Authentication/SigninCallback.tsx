@@ -8,8 +8,10 @@ const SigninCallback = () => {
   useEffect(() => {
     new UserManager({ response_mode: "query" })
       .signinRedirectCallback()
-      .then(() => {
-        history.push("/home");
+      .then((user) => {
+        console.info("Processing user...");
+        console.log(user);
+        history.push("/");
       })
       .catch((e) => {
         console.error(e);
