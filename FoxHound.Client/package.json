@@ -21,6 +21,8 @@
   "dependencies": {
     "@material-ui/core": "^4.9.8",
     "@material-ui/icons": "^4.9.1",
+    "@microsoft/applicationinsights-react-js": "^2.5.4",
+    "@microsoft/applicationinsights-web": "^2.5.4",
     "axios": "^0.19.2",
     "easymde": "^2.9.0",
     "highlight.js": "^9.18.1",
@@ -29,9 +31,7 @@
     "react-app-polyfill": "^1.0.6",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
-    "react-simplemde-editor": "^4.1.0",
-    "@microsoft/applicationinsights-web": "2.5.4",
-    "@microsoft/applicationinsights-react-js": "2.5.4"
+    "react-simplemde-editor": "^4.1.0"
   },
   "browerslist": [
     "last 1 Chrome versions",

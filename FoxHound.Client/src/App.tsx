@@ -6,7 +6,9 @@ import NavDrawer from "./components/Navigation/NavDrawer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthService } from "./services/Authentication/AuthService";
 import SigninCallback from "./components/Authentication/SigninCallback";
-import withAppInsights from "./Utility/AppInsights";
+import withAppInsights from "./utilities/Utility/AppInsights";
+
+const authService = new AuthService();
 
 const App: React.ComponentClass = withAppInsights(() => {
   return (
