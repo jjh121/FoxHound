@@ -1,10 +1,7 @@
-﻿using FoxHound.App.Blogs.CreateComment;
+﻿using FoxHound.App.Blogs.Common;
+using FoxHound.App.Blogs.CreateComment;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FoxHound.Web.Controllers
@@ -19,10 +16,10 @@ namespace FoxHound.Web.Controllers
         }
 
         [HttpPost("[action]")]
-        public async Task<int> Create(CreateCommentCommand command)
+        public async Task<CommentResult> Create(CreateCommentCommand command)
         {
-            int commentId = await _mediator.Send(command);
-            return commentId;
+            CommentResult comment = await _mediator.Send(command);
+            return comment;
         }
     }
 }

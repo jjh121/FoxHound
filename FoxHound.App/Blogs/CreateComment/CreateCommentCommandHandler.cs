@@ -1,16 +1,14 @@
-﻿using FoxHound.App.Data;
+﻿using FoxHound.App.Blogs.Common;
+using FoxHound.App.Data;
 using FoxHound.App.Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace FoxHound.App.Blogs.CreateComment
 {
-    public class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand, int>
+    public class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand, CommentResult>
     {
         private readonly IFoxHoundData _foxHoundData;
 
@@ -19,19 +17,18 @@ namespace FoxHound.App.Blogs.CreateComment
             _foxHoundData = foxHoundData;
         }
 
-        public async Task<int> Handle(CreateCommentCommand request, CancellationToken cancellationToken)
+        public async Task<CommentResult> Handle(CreateCommentCommand request, CancellationToken cancellationToken)
         {
             Post post = await _foxHoundData.Posts
                 .Include(x => x.Comments)
                 .SingleAsync(x => x.PostId == request.PostId, cancellationToken);
 
-            Comment newComment = new Comment(request.Author, request.Content);
+            Comment comment = new Comment(request.Author, request.Content);
 
-            post.Comments.Add(newComment);
-
+            post.Comments.Add(comment);
             await _foxHoundData.SaveChangesAsync(cancellationToken);
 
-            return newComment.CommentId;
+            return new CommentResult(comment.CommentId, comment.Author, comment.Content, comment.CreatedDate);
         }
     }
 }
