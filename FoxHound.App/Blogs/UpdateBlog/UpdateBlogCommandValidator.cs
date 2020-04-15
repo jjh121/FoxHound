@@ -1,21 +1,34 @@
 ﻿using FluentValidation;
+using FoxHound.App.Blogs.Common;
+using FoxHound.App.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace FoxHound.App.Blogs.UpdateBlog
 {
     public class UpdateBlogCommandValidator : AbstractValidator<UpdateBlogCommand>
     {
-        public UpdateBlogCommandValidator()
+        private readonly IFoxHoundData _foxHoundData;
+
+        public UpdateBlogCommandValidator(IFoxHoundData foxHoundData)
         {
+            _foxHoundData = foxHoundData;
+
             RuleFor(x => x.BlogId)
                 .NotEmpty().WithMessage("Blog Id is required");
 
-            RuleFor(x => x.Title)
-                .NotEmpty().WithMessage("Title is required")
-                .MaximumLength(128).WithMessage("Title must be less than or equal to {MaxLength} characters");
+            RuleFor(x => x).SetValidator(new CommonBlogCommandValidator());
 
             RuleFor(x => x.Owner)
-                .NotEmpty().WithMessage("Owner is required")
-                .MaximumLength(20).WithMessage("Owner must be less than or equal to {MaxLength} characters");
+                .MustAsync(OwnerNotAlreadyInUse).WithMessage("Owner already in use for a Blog");
+        }
+
+        private async Task<bool> OwnerNotAlreadyInUse(UpdateBlogCommand command, string ownerName, CancellationToken cancellationToken)
+        {
+            bool isOwnerInUse = await _foxHoundData.Blogs.AnyAsync(x => x.BlogId != command.BlogId && x.Owner.ToUpper() == ownerName.ToUpper(), cancellationToken);
+
+            return !isOwnerInUse;
         }
     }
 }
