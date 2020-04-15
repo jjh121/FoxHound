@@ -17,7 +17,7 @@ namespace FoxHound.Web
 {
     public class Startup
     {
-        // Application assembly used for dependency resolution of Mediatr and FluentValidation.
+        // Application assembly used for dependency resolution of MediatR and FluentValidation.
         private const string ApplicationAssemblyName = "FoxHound.App";
 
         private const string LocalCorsPolicy = "LocalCorsPolicy";
@@ -76,12 +76,14 @@ namespace FoxHound.Web
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "FoxHound API V1");
             });
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseRouting();
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

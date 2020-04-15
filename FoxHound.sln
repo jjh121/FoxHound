@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoxHound.App", "FoxHound.Ap
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{99DF41FD-64DD-4469-BED5-27B6854FCC2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoxHound.App.Tests", "FoxHound.App.Tests\FoxHound.App.Tests.csproj", "{FED7BCA7-CBC7-46A5-BEBC-A36873B79218}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FoxHound.App.Tests", "FoxHound.App.Tests\FoxHound.App.Tests.csproj", "{FED7BCA7-CBC7-46A5-BEBC-A36873B79218}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FoxHound.IDP", "FoxHound.IDP\FoxHound.IDP.csproj", "{A59B72C5-A369-4173-9D6A-BF69B18D661C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{FED7BCA7-CBC7-46A5-BEBC-A36873B79218}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FED7BCA7-CBC7-46A5-BEBC-A36873B79218}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FED7BCA7-CBC7-46A5-BEBC-A36873B79218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A59B72C5-A369-4173-9D6A-BF69B18D661C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A59B72C5-A369-4173-9D6A-BF69B18D661C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A59B72C5-A369-4173-9D6A-BF69B18D661C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A59B72C5-A369-4173-9D6A-BF69B18D661C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

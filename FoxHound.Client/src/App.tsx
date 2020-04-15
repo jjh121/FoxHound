@@ -1,15 +1,27 @@
 import "react-app-polyfill/stable";
 
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
-import NavDrawer from "./Navigation/NavDrawer";
-import { BrowserRouter as Router } from "react-router-dom";
-import withAppInsights from "./Utility/AppInsights";
+import NavDrawer from "./components/Navigation/NavDrawer";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { AuthService } from "./services/Authentication/AuthService";
+import SigninCallback from "./components/Authentication/SigninCallback";
+import withAppInsights from "./utilities/Utility/AppInsights";
+
+const authService = new AuthService();
 
 const App: React.ComponentClass = withAppInsights(() => {
   return (
     <Router>
-      <NavDrawer />
+      <Switch>
+        <Route exact path="/signin-callback">
+          <SigninCallback />
+        </Route>
+        <Route exact path="/silent-renew"></Route>
+        <Route path="/">
+          <NavDrawer authService={authService} />
+        </Route>
+      </Switch>
     </Router>
   );
 });
