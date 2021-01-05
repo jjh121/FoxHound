@@ -23,7 +23,7 @@
     "@material-ui/icons": "^4.9.1",
     "@microsoft/applicationinsights-react-js": "^2.5.4",
     "@microsoft/applicationinsights-web": "^2.5.4",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "easymde": "^2.9.0",
     "highlight.js": "^9.18.1",
     "oidc-client": "^1.10.1",
